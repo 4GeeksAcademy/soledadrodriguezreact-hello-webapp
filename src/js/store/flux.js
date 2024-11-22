@@ -12,6 +12,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
+			],
+			contacts: [
 			]
 		},
 		actions: {
@@ -37,8 +39,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			getContacts: ()=>{
+				fetch("https://playground.4geeks.com/contact/agendas/soledadrodriguez")
+				.then((response)=>{
+					return response.json()
+				})
+				.then((data)=>{
+					console.log(data);
+					setStore({contacts: data.contacts})
+				})
+				.catch((err)=>{err})
 			}
 		}
+		
 	};
 };
 
